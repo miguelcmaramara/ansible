@@ -1,0 +1,13 @@
+- name: REMOVE ME FROM HYPRLAND
+  debug:
+    msg: "remove me from hyprland"
+
+- name: Install core apps
+  become: true
+  pacman:
+    name:
+      - base-devel
+      - less
+      - man
+      - unzip
+    state: present

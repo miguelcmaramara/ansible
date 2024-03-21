@@ -39,7 +39,6 @@
   become: true
   pacman:
     name:
-      # TODO: - kitty/alacritty
       - chezmoi
       - neovim
     state: latest
