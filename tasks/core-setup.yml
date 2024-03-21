@@ -1,0 +1,5 @@
+- name: Arch setup
+  block:
+    - name: basic programs
+      import_tasks: arch/core.yml
+  when: ansible_os_family == "Archlinux"

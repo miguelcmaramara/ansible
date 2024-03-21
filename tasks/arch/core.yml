@@ -1,0 +1,47 @@
+- name: Install core apps
+  become: true
+  pacman:
+    name:
+      - base-devel
+      - less
+      - man
+      - unzip
+    state: present
+
+- name: Install prettyfiers
+  become: true
+  pacman:
+    name:
+      - ttf-meslo-nerd # lazyvim dependency
+    state: present
+
+- name: Install languages and environments
+  become: true
+  pacman:
+    name:
+      - nodejs
+      - npm
+      # TODO: python? rust? etc. setup dev environments for each you might need to move this
+    state: present
+
+- name: Install (present) dev apps
+  become: true
+  pacman:
+    name:
+      - fzf
+      - openssh
+      - ripgrep # lazyvim dependencies:
+      - lazygit
+      - fd
+    state: present
+
+- name: Install (latest) dev apps
+  become: true
+  pacman:
+    name:
+      # TODO: - kitty/alacritty
+      - chezmoi
+      - neovim
+    state: latest
+  tags:
+    - neovim
