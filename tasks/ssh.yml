@@ -22,4 +22,14 @@
     mode: "0644"
   tags:
     - ssh
+
+- name: Activating ssh agent
+  shell: "eval $(ssh-agent)"
+  tags:
+    - ssh
+
+- name: Adding key to ssh agent
+  shell: "ssh-add {{ dest_key }}"
+  tags:
+    - ssh
 # NOTE: Do I need to set authorized key?

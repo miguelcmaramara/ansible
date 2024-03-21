@@ -1,9 +1,8 @@
 # Package dependencies: chezmoi
 - name: Initiating dotfiles
-  shell: "chezmoi init --force https://github.com/{{ github_username }}/dotfiles.git"
+  shell: "chezmoi init --force git@github.com:{{ github_username }}/dotfiles.git"
 
 - name: Updating and applying dotfiles
   shell: "chezmoi update --force"
   tags:
     - neovim
-

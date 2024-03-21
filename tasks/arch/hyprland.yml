@@ -1,13 +1,13 @@
-- name: REMOVE ME FROM HYPRLAND
-  debug:
-    msg: "remove me from hyprland"
-
-- name: Install core apps
+- name: Install hyprland
   become: true
   pacman:
     name:
-      - base-devel
-      - less
-      - man
-      - unzip
+      - hyprland
+    state: present
+
+- name: Installing Hyprland required packages
+  become: true
+  pacman:
+    name:
+      - mesa # Nouveau nvidia driver
     state: present
