@@ -5,9 +5,75 @@
       - hyprland
     state: present
 
-- name: Installing Hyprland required packages
+- name: Installing Hyprland required and ecosystem packages
   become: true
   pacman:
     name:
       - mesa # Nouveau nvidia driver
+      - alsa-utils # not technically for hyprland but is necessary for audio
+      - pipewire
+      - pipewire-pulse
+      - pipewire-alsa
+      # - pipewire-jack
+      - wireplumber
+      - xdg-desktop-portal-hyprland
+      - qt5-wayland
+      - qt6-wayland
+
+      - waybar
+
+      # exec-once required:
+      - mako
+      - polkit-kde-agent
+
+      # ecosysstem packages
+      - sddm
+      - cliphist
     state: present
+
+- name: Systemd enable SDDM for startup
+  become: true
+  systemd_service:
+    name: sddm
+    enabled: true
+
+- name: Change monitor settings
+  become: true
+  copy:
+    src: "{{ scripts_folder }}/sddm-Xsetup"
+    dest: "/usr/share/sddm/scripts/Xsetup"
+
+- name: Installing Arial SDDM Theme packages - https://github.com/3ximus/aerial-sddm-theme
+  become: true
+  pacman:
+    name:
+      - gst-libav
+      - phonon-qt5-gstreamer
+      - gst-plugins-good
+      - qt5-quickcontrols
+      - qt5-graphicaleffects
+      - qt5-multimedia
+    state: present
+
+- name: Clone Arial SDDM repository
+  git:
+    repo: "https://github.com/3ximus/aerial-sddm-theme.git"
+    dest: "{{ temp_folder }}/aerial-sddm-theme"
+
+- name: Move into themes
+  become: true
+  copy:
+    src: "{{ temp_folder }}/aerial-sddm-theme"
+    dest: "/usr/share/sddm/themes/"
+
+- name: Create sddm config
+  become: true
+  file:
+    path: "/etc/sddm.conf.d/"
+    state: directory
+
+- name: Move sddm config file
+  become: true
+  copy:
+    src: "{{ scripts_folder }}/sddm.conf"
+    dest: "/etc/sddm.conf.d/sddm.conf"

@@ -1,14 +1,27 @@
 - hosts: localhost
   vars:
     github_username: "miguelcmaramara"
+    scripts_folder: "./scripts"
     source_key: "./.ssh/id_ed25519"
     dest_key: "{{lookup('env', 'HOME')}}/.ssh/id_ed25519"
+    temp_folder: "{{lookup('env', 'HOME')}}/ansible_temp"
   pre_tasks:
+    - name: Create temp folder
+      file:
+        path: "{{ temp_folder }}"
+        state: directory
+
     - name: Update pacman
       become: true
       pacman:
         update_cache: true
       when: ansible_os_family == "Archlinux"
+
+  # post_tasks:
+  #   - name: Create temp folder
+  #     file:
+  #       path: "{{ temp_folder }}"
+  #       state: absent
 
   tasks:
     - import_tasks: tasks/core-setup.yml

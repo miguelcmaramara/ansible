@@ -30,6 +30,7 @@
     name:
       - fzf
       - openssh
+      - tmux
       - ripgrep # lazyvim dependencies:
       - lazygit
       - fd
@@ -44,3 +45,13 @@
     state: latest
   tags:
     - neovim
+
+- name: Systemd start timesync for dual booting
+  become: true
+  systemd_service:
+    name: systemd-timesyncd
+    enabled: true
+
+- name: Systemd start timesync for dual booting
+  become: true
+  shell: "timedatectl set-ntp true"

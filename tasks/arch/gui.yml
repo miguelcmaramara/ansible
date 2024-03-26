@@ -1,3 +1,7 @@
-- name: REMOVE ME FROM GUI
-  debug:
-    msg: "remove me from gui"
+- name: Install GUI programs
+  become: true
+  pacman:
+    name:
+      - alacritty
+      - firefox
+    state: present
