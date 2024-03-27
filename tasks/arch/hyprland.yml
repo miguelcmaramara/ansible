@@ -16,11 +16,10 @@
       - pipewire-alsa
       # - pipewire-jack
       - wireplumber
+      - pavucontrol
       - xdg-desktop-portal-hyprland
       - qt5-wayland
       - qt6-wayland
-
-      - waybar
 
       # exec-once required:
       - mako
@@ -29,6 +28,8 @@
       # ecosysstem packages
       - sddm
       - cliphist
+      - rofi
+      - waybar # not yet configured
 
       # screensharing
       - slurp

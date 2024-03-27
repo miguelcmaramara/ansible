@@ -31,10 +31,19 @@
       - fzf
       - openssh
       - tmux
+      - htop
       - ripgrep # lazyvim dependencies:
       - lazygit
       - fd
+
+      # zsh setup
+      - zsh
+      - zsh-syntax-highlighting
     state: present
+
+- name: Add zsh as default shell
+  become: true
+  shell: "chsh -s /usr/bin/zsh"
 
 - name: Install (latest) dev apps
   become: true
