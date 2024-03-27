@@ -29,6 +29,10 @@
       # ecosysstem packages
       - sddm
       - cliphist
+
+      # screensharing
+      - slurp
+      - grim
     state: present
 
 - name: Systemd enable SDDM for startup
