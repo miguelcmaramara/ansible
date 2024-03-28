@@ -22,19 +22,41 @@
       - qt6-wayland
 
       # exec-once required:
-      - mako
+      - mako # not yet configured
       - polkit-kde-agent
 
       # ecosysstem packages
       - sddm
       - cliphist
-      - rofi
       - waybar # not yet configured
+      - hypridle
+      - hyprlock
 
       # screensharing
       - slurp
       - grim
     state: present
+
+- name: Install rofi
+  block:
+    - name: Uninstall rofi
+      shell: "ninja -C ${HOME}/rofi/build uninstall"
+      ignore_errors: true
+
+    - name: remove rofi repo
+      shell: "rm -rf ${HOME}/rofi"
+
+    - name: Clone wayland branch of rofi
+      git:
+        repo: "https://github.com/lbonn/rofi.git"
+        dest: "~/rofi/"
+        single_branch: yes
+        version: wayland
+
+    - name: Build and install rofi locally
+      shell:
+        cmd: "meson setup build --prefix=${HOME}/.local/ && ninja -C build install"
+        chdir: "~/rofi"
 
 - name: Systemd enable SDDM for startup
   become: true
