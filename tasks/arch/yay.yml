@@ -1,0 +1,55 @@
+- name: Remove yay
+  become: true
+  pacman:
+    name:
+      - yay
+      - yay-debug
+    state: absent
+
+- name: Clone yay
+  git:
+    repo: "https://aur.archlinux.org/yay.git"
+    dest: "{{ temp_folder }}/yay"
+
+- name: build yay
+  shell:
+    cmd: "makepkg -si --noconfirm"
+    chdir: "{{ temp_folder}}/yay"
+
+- name: Update yay
+  pacman:
+    update_cache: true
+    executable: yay
+
+- name: Add yay and pacman to sudoers
+  pacman:
+    update_cache: true
+    executable: yay
+
+- name: Add yay and pacman to sudoers
+  # help for this:
+  # - https://medium.com/kernel-space/linux-fundamentals-a-to-z-of-a-sudoers-file-a5da99a30e7f
+  # - https://github.com/mnussbaum/ansible-yay/issues/2
+  become: true
+  community.general.sudoers:
+    name: yay-pacman-no-pass
+    state: present
+    user: miguel
+    runas: ALL
+    commands:
+      - "/usr/bin/yay"
+      - "/usr/bin/pacman"
+    nopassword: true
+#
+# Previous methods to install yay modules
+#
+# - name: Install yay module
+#   git:
+#     repo: "https://github.com/mnussbaum/ansible-yay"
+#     dest: "{{ library_folder }}/ansible-yay"
+#
+# - name: Link yay module
+#   file:
+#     src: "{{ library_folder }}/ansible-yay/yay"
+#     dest: "{{ library_folder }}/yay"
+#     state: link

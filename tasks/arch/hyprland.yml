@@ -17,6 +17,7 @@
       # - pipewire-jack
       - wireplumber
       - pavucontrol
+      - pulsemixer
       - xdg-desktop-portal-hyprland
       - qt5-wayland
       - qt6-wayland
@@ -35,6 +36,12 @@
       # screensharing
       - slurp
       - grim
+    state: present
+
+- name: Installing AUR Hyprland packages
+  yay:
+    name:
+      - swww # takes literally forever to compile
     state: present
 
 - name: Install rofi
@@ -58,6 +65,9 @@
         cmd: "meson setup build --prefix=${HOME}/.local/ && ninja -C build install"
         chdir: "~/rofi"
 
+    # Rofi themes found at:
+    # https://github.com/newmanls/rofi-themes-collection
+
 - name: Systemd enable SDDM for startup
   become: true
   systemd_service:
@@ -67,19 +77,26 @@
 - name: Change monitor settings
   become: true
   copy:
-    src: "{{ scripts_folder }}/sddm-Xsetup"
+    src: "{{ rsrc_folder }}/sddm-Xsetup"
     dest: "/usr/share/sddm/scripts/Xsetup"
 
 - name: Installing Arial SDDM Theme packages - https://github.com/3ximus/aerial-sddm-theme
+  # sugar dark sddm packages added as well
   become: true
   pacman:
     name:
+      # arial theme
       - gst-libav
       - phonon-qt5-gstreamer
       - gst-plugins-good
       - qt5-quickcontrols
       - qt5-graphicaleffects
       - qt5-multimedia
+      # sugar dark
+      - qt5-quickcontrols2
+      - qt5-svg
+      # catppuccin
+      - qt5-declarative
     state: present
 
 - name: Clone Arial SDDM repository
@@ -93,6 +110,16 @@
     src: "{{ temp_folder }}/aerial-sddm-theme"
     dest: "/usr/share/sddm/themes/"
 
+- name: Extract and move sugar-dark theme
+  become: true
+  shell: "tar -xzvf {{ rsrc_folder }}/sugar-dark.tar -C /usr/share/sddm/themes"
+
+- name: Extract and move catppuccin theme
+  become: true
+  unarchive:
+    src: "{{ rsrc_folder }}/catppuccin-macchiato.zip"
+    dest: "/usr/share/sddm/themes/"
+
 - name: Create sddm config
   become: true
   file:
@@ -102,5 +129,5 @@
 - name: Move sddm config file
   become: true
   copy:
-    src: "{{ scripts_folder }}/sddm.conf"
+    src: "{{ rsrc_folder }}/sddm.conf"
     dest: "/etc/sddm.conf.d/sddm.conf"

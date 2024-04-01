@@ -1,0 +1,9 @@
+# - name: Install awesome-wm
+#   become: true
+#   pacman:
+#     name:
+#       - xorg-xinit
+#       - xorg-server
+#       - xterm
+#       - awesome
+#     state: present

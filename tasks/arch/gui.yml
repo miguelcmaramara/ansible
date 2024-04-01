@@ -6,4 +6,27 @@
       - firefox
       - obs-studio
       - obsidian
+      - discord
     state: present
+
+- name: Install AUR programs
+  yay:
+    name:
+      - spotify
+      - spicetify-cli # https://spicetify.app/docs/advanced-usage/installation#aur
+    state: present
+
+- name: Set spotify themes
+  git:
+    repo: "https://github.com/spicetify/spicetify-themes.git"
+    depth: 1
+    dest: "{{ temp_folder }}/spicetify-themes"
+
+- name: Copy over themes
+  copy:
+    src: "{{ temp_folder }}/spicetify-themes/"
+    dest: "$HOME/.config/spicetify/Themes"
+
+- name: "Permissions to spicetify"
+  become: true
+  shell: "chmod a+wr /opt/spotify && chmod a+wr /opt/spotify/Apps -R"

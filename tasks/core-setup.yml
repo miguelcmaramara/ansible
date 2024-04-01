@@ -1,7 +1,8 @@
 - name: Arch setup
   block:
+    - import_tasks: arch/yay.yml
     - import_tasks: arch/basic.yml
     - import_tasks: arch/hyprland.yml
-    # - import_tasks: arch/awesome-wm.yml
+    - import_tasks: arch/awesome-wm.yml
     - import_tasks: arch/gui.yml
   when: ansible_os_family == "Archlinux"
