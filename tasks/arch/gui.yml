@@ -4,9 +4,12 @@
     name:
       - alacritty
       - firefox
+      - vivaldi
       - obs-studio
       - obsidian
       - discord
+      - gimp
+      - dolphin
     state: present
 
 - name: Install AUR programs

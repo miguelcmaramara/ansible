@@ -38,6 +38,7 @@
       - lazygit
       - fd
       - meson
+      - jq
 
       # zsh setup
       - zsh

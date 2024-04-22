@@ -1,0 +1,7 @@
+- name: Install Node
+  become: true
+  package:
+    name:
+      - nodejs
+      - typescript
+    state: present

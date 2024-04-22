@@ -1,0 +1,9 @@
+- name: Install QMK
+  become: true
+  package:
+    name:
+      - qmk
+    state: present
+
+- name: Run qmk setup
+  shell: "qmk setup miguelcmaramara/qmk_firmware -y -H ~/HD/__projects/qmk_firmware/"

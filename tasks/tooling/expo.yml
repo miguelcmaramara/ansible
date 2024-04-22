@@ -1,0 +1,15 @@
+- name: Install pre-reqs for expo
+  # follow instructions from https://docs.expo.dev/get-started/installation/
+  become: true
+  package:
+    name:
+      - nodejs
+      - typescript
+      - git
+    state: present
+
+- name: Installing yay packages
+  yay:
+    name:
+      - watchman-bin # takes literally forever to compile
+    state: present
