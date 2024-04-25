@@ -10,6 +10,7 @@
       - discord
       - gimp
       - dolphin
+      - ticktick
     state: present
 
 - name: Install AUR programs

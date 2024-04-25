@@ -15,15 +15,7 @@
       - ttf-meslo-nerd # lazyvim dependency
       - ttf-jetbrains-mono # lazyvim dependency
       - ttf-jetbrains-mono-nerd # lazyvim dependency
-    state: present
-
-- name: Install languages and environments
-  become: true
-  pacman:
-    name:
-      - nodejs
-      - npm
-      # TODO: python? rust? etc. setup dev environments for each you might need to move this
+      - noto-fonts-emoji
     state: present
 
 - name: Install (present) dev apps
