@@ -5,6 +5,8 @@
     library_folder: "./library"
     source_key: "./.ssh/id_ed25519"
     dest_key: "{{lookup('env', 'HOME')}}/.ssh/id_ed25519"
+    source_aws_key: "./.ssh/Miguel.pem"
+    dest_aws_key: "{{lookup('env', 'HOME')}}/.ssh/Miguel.pem"
     temp_folder: "{{lookup('env', 'HOME')}}/ansible_temp"
   pre_tasks:
     - name: Create temp folder

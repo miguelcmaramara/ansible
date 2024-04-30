@@ -12,6 +12,10 @@
     src: "{{ source_key }}"
     dest: "{{ dest_key }}"
     mode: "0600"
+  loop:
+    - src: "{{ source_aws_key }}"
+      dest: "{{ dest_aws_key }}"
+      mode: "0600"
   tags:
     - ssh
 

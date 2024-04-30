@@ -15,7 +15,9 @@
       - ttf-meslo-nerd # lazyvim dependency
       - ttf-jetbrains-mono # lazyvim dependency
       - ttf-jetbrains-mono-nerd # lazyvim dependency
+      - noto-fonts
       - noto-fonts-emoji
+      - noto-fonts-cjk
     state: present
 
 - name: Install (present) dev apps
