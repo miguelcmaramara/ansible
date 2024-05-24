@@ -1,0 +1,9 @@
+- name: Install Postgres
+  become: true
+  package:
+    name:
+      - postgresql
+    state: present
+# there is setup so follow the following links:
+# https://wiki.archlinux.org/title/PostgreSQL
+# https://www.postgresql.org/docs/current/install-post.html

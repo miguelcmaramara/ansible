@@ -1,2 +1,2 @@
 #!/bin/bash
-ansible-playbook local.yml -J -K -t curr
+ansible-playbook quick-install.yml -J -K

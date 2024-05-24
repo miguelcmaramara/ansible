@@ -1,0 +1,7 @@
+- name: Install QMK
+  become: true
+  package:
+    name:
+      - gnome-terminal
+      - docker
+    state: present

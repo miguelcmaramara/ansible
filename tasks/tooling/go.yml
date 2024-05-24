@@ -1,0 +1,6 @@
+- name: Install go
+  become: true
+  package:
+    name:
+      - go
+    state: present

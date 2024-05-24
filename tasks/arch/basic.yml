@@ -6,6 +6,7 @@
       - less
       - man
       - unzip
+      - zip
     state: present
 
 - name: Install prettyfiers

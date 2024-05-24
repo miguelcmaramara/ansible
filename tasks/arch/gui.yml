@@ -19,6 +19,8 @@
     name:
       - spotify
       - spicetify-cli # https://spicetify.app/docs/advanced-usage/installation#aur
+      # - bruno-bin
+      - webcord-bin
     state: present
 
 - name: Set spotify themes

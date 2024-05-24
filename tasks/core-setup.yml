@@ -9,4 +9,6 @@
 
     - import_tasks: tooling/qmk.yml
     - import_tasks: tooling/node.yml
+    - import_tasks: tooling/go.yml
+    - import_tasks: tooling/expo.yml
   when: ansible_os_family == "Archlinux"

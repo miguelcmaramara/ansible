@@ -1,0 +1,13 @@
+- name: uninstall sdk man # to truly uninstall, remove snippet from zprofile
+  shell: "rm -rf ~/.sdkman"
+
+- name: Installing SDK Man
+  shell:
+    cmd: "curl -s 'https://get.sdkman.io' | bash"
+    chdir: "{{lookup('env', 'HOME')}}"
+  args:
+    executable: /bin/bash
+
+# https://stackoverflow.com/questions/76898362/install-sdkman-on-ubuntu-server-through-ansible-playbook
+- name: Source zshrc
+  shell: source ~/.zprofile # && sdk install java {{ java_version }} # this is for later

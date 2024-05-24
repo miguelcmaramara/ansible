@@ -1,0 +1,4 @@
+# for running a single file
+- hosts: localhost
+  tasks:
+    - import_tasks: tasks/tooling/postgres.yml

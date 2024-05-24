@@ -13,3 +13,10 @@
     name:
       - watchman-bin # takes literally forever to compile
     state: present
+
+- name: install android studio # make sure to run it after so you can run the installation wizard
+  # make sure that kvm or virualization is allowed in your bios
+  yay:
+    name:
+      - android-studio
+    state: present
